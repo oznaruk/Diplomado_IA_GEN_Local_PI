@@ -1,0 +1,724 @@
+# Planteamiento del problema y caracterización de riesgos para una plataforma web multimodal local-first destinada al Colectivo de Artistas Caminarte y gestores culturales de Santander de Quilichao, Cauca
+
+## 1. Título del proyecto
+
+**Planteamiento del problema y caracterización de riesgos para una plataforma web multimodal local-first destinada al Colectivo de Artistas Caminarte y gestores culturales de Santander de Quilichao, Cauca**
+
+El proyecto integrador se desarrolla en el marco del diplomado **“Inteligencia Artificial Generativa Local, Agentes Autónomos y Sistemas Multimodales”**, específicamente dentro del alcance del **Módulo 1: Fundamentos, soberanía tecnológica y gobernanza de IA**. En consecuencia, el presente documento delimita la situación problemática, caracteriza los actores y activos de información, establece requisitos preliminares, plantea una arquitectura conceptual local-híbrida e identifica riesgos iniciales, sin abordar todavía una implementación técnica completa.
+
+La formulación se fundamenta en la información suministrada para el proyecto, que establece como contexto una aplicación web multimodal destinada al Colectivo de Artistas “Caminarte” y a gestores culturales de Santander de Quilichao, Cauca, con operación local prioritaria, sincronización controlada y capacidades para gestionar activos culturales, documentales y comerciales.
+
+---
+
+## 2. Resumen ejecutivo
+
+El presente documento caracteriza la problemática que motiva el diseño preliminar de una plataforma web multimodal para el Colectivo de Artistas “Caminarte” y gestores de proyectos culturales de Santander de Quilichao, Cauca. La situación problemática se relaciona con la posible dispersión de obras musicales, imágenes, documentos, información sobre derechos, ubicaciones de eventos, catálogos y otros activos culturales y comerciales, así como con las limitaciones derivadas de conectividad variable, recursos tecnológicos heterogéneos y dependencia de servicios externos. Estos factores pueden dificultar la organización, consulta, preservación, difusión y trazabilidad de la información.
+
+Como respuesta preliminar se plantea una arquitectura **local-first**, es decir, una arquitectura en la que los procesos esenciales se ejecutan y conservan prioritariamente en infraestructura local, complementada por mecanismos híbridos de sincronización y respaldo remoto bajo reglas explícitas. La propuesta no supone que la operación local elimine los riesgos de seguridad, privacidad o gestión de derechos; por el contrario, exige controles de acceso, auditoría, respaldo, actualización y administración responsable.
+
+La plataforma contemplaría inicialmente gestión de usuarios, activos culturales, audio, imágenes, documentos, derechos y licencias, mapas, eventos, merchandising, metadatos, auditoría, consulta offline y sincronización controlada. Las capacidades de inteligencia artificial generativa, recuperación aumentada mediante generación (RAG) o agentes autónomos se consideran capacidades futuras, opcionales y sujetas a controles.
+
+El resultado esperado del Módulo 1 es una caracterización verificable del problema, los actores, los datos, los riesgos y los criterios de éxito que permita orientar las posteriores etapas de diseño, implementación y validación.
+
+---
+
+## 3. Introducción
+
+La gestión de activos culturales y artísticos comprende actividades que exceden la simple publicación de contenidos en Internet. Obras musicales, fotografías, piezas gráficas, documentos, información sobre autoría, licencias, convocatorias, eventos, productos y registros comerciales constituyen activos que requieren diferentes niveles de organización, protección, disponibilidad y trazabilidad.
+
+En el contexto territorial de Santander de Quilichao, Cauca, el proyecto se orienta al Colectivo de Artistas “Caminarte” y a gestores de proyectos culturales vinculados. El alcance suministrado contempla una plataforma capaz de integrar texto, audio, imágenes, mapas y otros activos digitales, con funcionalidades para organizar y presentar un catálogo musical, consultar documentación relacionada con derechos de autor y propiedad intelectual, georreferenciar actividades culturales y administrar un catálogo de productos físicos y digitales.
+
+La problemática que se pretende abordar no debe reducirse a la ausencia de una página web. La cuestión central está relacionada con la necesidad de contar con una estructura tecnológica y organizacional que permita mantener bajo control los activos culturales y documentales, definir quién puede acceder a ellos, registrar su procedencia y estado, gestionar permisos y decidir qué información puede publicarse, sincronizarse o mantenerse exclusivamente de manera local.
+
+La dispersión de información entre dispositivos, carpetas, servicios de almacenamiento, plataformas de terceros y medios de comunicación puede generar duplicación, pérdida de versiones, dificultades para localizar archivos y ausencia de una visión integrada de los activos. Cuando esta dispersión se combina con conectividad intermitente, la consulta y actualización de la información puede depender excesivamente de la disponibilidad de Internet.
+
+A ello se suma la naturaleza particular de los datos. El proyecto puede involucrar obras musicales, fotografías, material audiovisual, información de artistas, datos de contacto, ubicaciones de eventos, documentos relacionados con propiedad intelectual, inventarios y metadatos de autoría, licencias y permisos. Algunos de estos activos pueden ser públicos, mientras que otros requieren restricciones de acceso o autorización específica.
+
+Por estas razones, el proyecto adopta como principio preliminar una arquitectura **local-first**, complementada por mecanismos híbridos. Esta aproximación prioriza el procesamiento y almacenamiento local de los procesos esenciales, sin considerar prohibidos los servicios remotos, pero estableciendo que las transferencias externas deben ser excepcionales, justificadas y sometidas a reglas de autorización.
+
+El presente documento corresponde exclusivamente al Módulo 1 del diplomado. Por ello, su propósito es establecer una base de gobernanza y formulación del problema que permita posteriormente validar necesidades, arquitectura, hardware, datos y controles con los usuarios reales.
+
+---
+
+## 4. Contextualización territorial y organizacional
+
+### 4.1 Contexto territorial
+
+Santander de Quilichao, Cauca, constituye el ámbito territorial inicial del proyecto. Para efectos de esta formulación se reconoce un contexto en el que pueden presentarse limitaciones de conectividad, presupuesto, infraestructura tecnológica y disponibilidad de personal especializado. Estas condiciones no deben interpretarse como características absolutas de toda la población ni como resultados de un diagnóstico ya realizado, sino como **hipótesis de contexto que deberán validarse**.
+
+El diseño tecnológico, por tanto, no debe asumir disponibilidad permanente de Internet, servidores costosos o personal técnico especializado. El enfoque local-first busca responder preliminarmente a esta condición mediante la posibilidad de mantener los procesos esenciales disponibles en una infraestructura local y establecer mecanismos de sincronización únicamente cuando las condiciones y políticas del proyecto lo permitan.
+
+### 4.2 Contexto organizacional
+
+El proyecto se dirige al **Colectivo de Artistas “Caminarte”** y a gestores de proyectos culturales relacionados con su actividad. La información suministrada no contiene un diagnóstico institucional detallado del colectivo; por tanto, no se atribuyen al mismo estructuras organizacionales, número de integrantes, procedimientos internos o capacidades técnicas que no hayan sido suministrados.
+
+El papel de Caminarte se entiende, para esta etapa, como el de organización cultural alrededor de la cual pueden concentrarse obras, proyectos, eventos, documentación y productos. Esta caracterización deberá ser validada mediante entrevistas, revisión documental y sesiones de levantamiento de requisitos.
+
+### 4.3 Activos involucrados
+
+De manera preliminar, el sistema podrá administrar:
+
+- Obras musicales y grabaciones.
+- Fotografías, afiches y piezas gráficas.
+- Material audiovisual.
+- Información de artistas y gestores.
+- Datos de contacto y perfiles.
+- Eventos y ubicaciones culturales.
+- Documentación sobre derechos de autor.
+- Licencias y permisos.
+- Convocatorias e incentivos.
+- Proyectos culturales.
+- Catálogos de productos.
+- Inventarios y solicitudes.
+- Metadatos de autoría y procedencia.
+- Información restringida o potencialmente sensible.
+
+La clasificación definitiva deberá establecerse con los responsables del colectivo antes de realizar operaciones de publicación o transferencia.
+
+---
+
+# 5. Descripción de la situación problemática
+
+La situación problemática puede entenderse como una combinación de factores organizacionales, tecnológicos, territoriales y de gobernanza de datos.
+
+En primer lugar, la existencia de múltiples formatos y tipos de información puede favorecer una dispersión de los activos. Un archivo de audio puede encontrarse separado de su información de autoría; una fotografía puede carecer de información sobre licencia; un documento puede encontrarse en una ubicación diferente a la correspondiente al proyecto que lo utiliza; y los datos de un evento pueden estar separados de sus materiales de difusión.
+
+La ausencia de un repositorio integrado puede producir duplicación, pérdida de versiones, dificultades de búsqueda y baja trazabilidad. Esta última resulta especialmente relevante cuando se necesita determinar quién creó un contenido, quién autorizó su utilización, qué licencia posee, cuál es su versión vigente o quién modificó determinada información.
+
+En segundo lugar, el uso de plataformas externas puede generar dependencia tecnológica y transferencia de información fuera del entorno controlado por el colectivo. Esta circunstancia no implica que todo servicio remoto sea inseguro o inadecuado. El riesgo surge cuando la organización no dispone de reglas claras para determinar qué información puede ser transferida, con qué finalidad, bajo qué autorización y durante cuánto tiempo.
+
+En tercer lugar, la conectividad variable puede afectar la continuidad operativa. Si una plataforma dependiera completamente de servicios remotos, una interrupción de Internet podría impedir consultas, actualizaciones o acceso a información necesaria para actividades culturales. La operación offline de los procesos esenciales constituye, por tanto, una condición de diseño que deberá comprobarse durante las posteriores etapas.
+
+En cuarto lugar, la gestión de derechos de autor, licencias, créditos y permisos introduce riesgos específicos. La existencia de una obra dentro del repositorio no significa automáticamente que exista autorización para publicarla, transformarla, distribuirla o utilizarla comercialmente. Por ello, el sistema debe conservar metadatos relacionados con autoría, procedencia, licencias y permisos y evitar que la publicación se interprete como una autorización jurídica.
+
+En quinto lugar, la publicación de ubicaciones de eventos puede generar riesgos cuando se trate de lugares o actividades cuya ubicación deba restringirse. La información geográfica deberá clasificarse antes de hacerse pública y no deberá utilizarse para publicar domicilios privados sin consentimiento.
+
+Finalmente, la gestión de merchandising introduce necesidades diferentes a las de un archivo cultural. Inventarios, productos, solicitudes y eventualmente transacciones requieren controles adicionales. En esta fase se plantea únicamente una gestión básica de catálogo y productos, sin asumir la implementación de un sistema completo de comercio electrónico.
+
+En consecuencia, el problema no consiste exclusivamente en “tener muchos archivos”, sino en la dificultad potencial para **organizar, proteger, consultar, relacionar, versionar, publicar y sincronizar activos culturales heterogéneos bajo condiciones de conectividad y recursos variables**.
+
+Esta situación debe ser verificada posteriormente mediante diagnóstico, entrevistas, revisión documental, inventario de activos y validación directa con los usuarios.
+
+---
+
+# 6. Planteamiento del problema
+
+## 6.1 Problema central
+
+El Colectivo de Artistas “Caminarte” y los gestores culturales vinculados pueden enfrentar una gestión fragmentada de activos culturales, documentales y comerciales debido a la dispersión de información, la heterogeneidad tecnológica, las limitaciones de conectividad y la ausencia potencial de mecanismos integrados de clasificación, control de acceso, trazabilidad, derechos y sincronización, situación que podría dificultar la preservación, consulta, difusión y gestión segura de las obras y proyectos, incrementar la dependencia de servicios externos y generar riesgos de pérdida, exposición, alteración o uso no autorizado de información.
+
+## 6.2 Causas principales
+
+| Categoría | Causas preliminares |
+|---|---|
+| Organizacionales | Ausencia o heterogeneidad de procedimientos para organizar activos, definir responsables y administrar permisos. |
+| Tecnológicas | Dispersión de archivos entre dispositivos, aplicaciones y servicios; heterogeneidad de formatos y plataformas. |
+| Conectividad | Posible disponibilidad irregular de Internet y dependencia de servicios remotos para determinadas operaciones. |
+| Gestión de datos | Falta potencial de clasificación uniforme, metadatos, control de versiones y trazabilidad. |
+| Propiedad intelectual | Dificultad para relacionar obras con autores, licencias, créditos y permisos. |
+| Seguridad y privacidad | Posible utilización de mecanismos de acceso insuficientemente diferenciados y transferencia de información sin políticas explícitas. |
+| Sostenibilidad operativa | Recursos económicos y técnicos limitados y posible dependencia de proveedores, plataformas o tecnologías difíciles de mantener localmente. |
+
+## 6.3 Consecuencias principales
+
+Entre las consecuencias potenciales se encuentran:
+
+- Pérdida o duplicación de información.
+- Dificultad para localizar y difundir obras y eventos.
+- Exposición no autorizada de activos.
+- Pérdida de control sobre derechos y licencias.
+- Dependencia de proveedores externos.
+- Interrupción de procesos durante fallas de conectividad.
+- Baja trazabilidad de cambios, autores y versiones.
+- Dificultad para tomar decisiones con información consolidada.
+- Riesgos para artistas, gestores y asistentes a eventos.
+- Pérdida de oportunidades de circulación y comercialización cultural.
+
+Estas consecuencias constituyen hipótesis de impacto que deberán contrastarse durante el diagnóstico.
+
+## 6.4 Pregunta de investigación
+
+**¿Cómo puede diseñarse y caracterizarse una plataforma web multimodal local-first que permita al Colectivo de Artistas Caminarte y a gestores culturales de Santander de Quilichao organizar, consultar, proteger y gestionar sus activos culturales, documentales y comerciales, manteniendo operación local prioritaria y mecanismos controlados de sincronización remota?**
+
+### Preguntas específicas
+
+1. ¿Qué tipos de usuarios, activos de información y niveles de acceso deben considerarse para gestionar adecuadamente los contenidos del colectivo?
+2. ¿Qué información debe permanecer local y bajo qué condiciones podría sincronizarse remotamente?
+3. ¿Qué controles preliminares de privacidad, seguridad, trazabilidad, derechos y licencias son necesarios?
+4. ¿Qué requisitos funcionales y no funcionales debe cumplir una plataforma que opere en condiciones de conectividad variable?
+5. ¿Qué riesgos deben ser identificados y tratados siguiendo un enfoque basado en el NIST AI Risk Management Framework?
+
+---
+
+# 7. Justificación
+
+## 7.1 Justificación social y cultural
+
+Los activos culturales representan una parte importante de la memoria, producción y circulación de una comunidad. Una infraestructura que permita organizarlos y preservarlos puede contribuir a facilitar su consulta, difusión y gestión.
+
+La propuesta no pretende sustituir las prácticas culturales existentes ni imponer una forma única de organización. Su propósito es proporcionar una estructura tecnológica que pueda adaptarse a las necesidades verificadas del colectivo.
+
+## 7.2 Justificación tecnológica
+
+La diversidad de formatos exige una plataforma capaz de relacionar texto, audio, imágenes, documentos, mapas y catálogos. La multimodalidad se entiende aquí como la capacidad de gestionar diferentes tipos de información dentro de un mismo ecosistema, no como sinónimo de autonomía completa de inteligencia artificial.
+
+## 7.3 Justificación territorial
+
+La posibilidad de conectividad variable hace pertinente evaluar una arquitectura capaz de operar localmente. Esto permite que las funciones esenciales no dependan permanentemente de una conexión externa.
+
+## 7.4 Justificación organizacional
+
+Un repositorio integrado puede favorecer la definición de responsables, permisos, metadatos, versiones y procedimientos de gestión. Sin embargo, la tecnología no sustituye la necesidad de establecer políticas organizacionales.
+
+## 7.5 Justificación académica
+
+El proyecto permite aplicar principios de ingeniería de sistemas, inteligencia artificial local, sistemas multimodales y gobernanza de riesgos. El Módulo 1 proporciona la oportunidad de construir primero una caracterización formal antes de seleccionar tecnologías e implementar componentes.
+
+## 7.6 Justificación de soberanía y privacidad
+
+La soberanía tecnológica se relaciona con mantener capacidad de decisión sobre infraestructura, datos, herramientas y transferencias. La operación local puede reducir determinadas transferencias hacia servicios externos, pero no elimina los riesgos. La infraestructura local también requiere autenticación, autorización, cifrado cuando corresponda, copias de seguridad, actualización, auditoría y gestión de vulnerabilidades.
+
+## 7.7 Justificación de sostenibilidad
+
+Una arquitectura híbrida permite evaluar qué componentes conviene administrar localmente y cuáles pueden beneficiarse de servicios externos. Esta decisión debe considerar costos, mantenimiento, hardware, conectividad, seguridad, escalabilidad y capacidades reales del colectivo.
+
+Por tanto, la arquitectura híbrida no se considera universalmente superior. Se plantea como una alternativa que debe ser validada frente a las condiciones concretas de Caminarte.
+
+---
+
+# 8. Usuarios y partes interesadas
+
+| Actor o usuario | Rol | Necesidades | Datos que utiliza o produce | Nivel de acceso preliminar | Riesgos asociados |
+|---|---|---|---|---|---|
+| Artistas del colectivo | Usuarios internos y productores de contenido | Gestionar obras, créditos, perfiles y materiales | Audio, imágenes, biografías, metadatos | Según rol y propiedad del contenido | Uso no autorizado, pérdida de autoría |
+| Gestores de proyectos culturales | Usuarios internos | Administrar proyectos, eventos y documentación | Proyectos, documentos, eventos, solicitudes | Interno controlado | Exposición o modificación indebida |
+| Administradores | Gestión del sistema | Usuarios, permisos, configuración y auditoría | Credenciales, roles, registros | Alto privilegio, mínimo necesario | Compromiso de cuenta, privilegios excesivos |
+| Visitantes/ciudadanía | Usuarios externos | Consultar contenidos públicos | Contenido publicado | Público | Acceso accidental a contenido restringido |
+| Organizadores de eventos | Usuarios internos/externos autorizados | Gestionar eventos y ubicaciones | Fechas, lugares, materiales | Restringido según evento | Exposición de ubicaciones sensibles |
+| Responsables de derechos y licencias | Usuarios especializados | Validar autoría, permisos y licencias | Licencias, créditos, autorizaciones | Restringido | Publicación sin autorización |
+| Compradores/interesados | Usuarios externos | Consultar productos | Catálogo y disponibilidad | Público sobre información autorizada | Exposición de datos comerciales |
+| Entidades aliadas | Actores externos autorizados | Consultar o intercambiar información específica | Proyectos, convocatorias, contenidos autorizados | Acceso limitado | Transferencia indebida |
+| Personal técnico/soporte | Soporte operativo | Mantener infraestructura | Registros técnicos y configuración | Privilegio temporal y controlado | Acceso a información sensible |
+| Comunidad local | Actor indirecto | Acceder a información cultural pública | Eventos y contenidos públicos | Público | Exclusión o publicación inadecuada |
+
+Los niveles de acceso son preliminares y deberán transformarse en una matriz formal de roles y permisos durante el levantamiento de requisitos.
+
+---
+
+# 9. Activos de información y clasificación preliminar
+
+La clasificación siguiente es una propuesta inicial. Deberá validarse con Caminarte, especialmente para determinar propietarios, restricciones, licencias y reglas de publicación.
+
+| Activo de información | Ejemplo | Propietario o responsable | Sensibilidad | Requisito de protección | Tratamiento local o remoto recomendado |
+|---|---|---|---|---|---|
+| Audio | Canciones y grabaciones | Artista/colectivo | Restringido según licencia | Autoría, licencia, integridad | Local; publicación autorizada |
+| Imágenes | Fotografías y afiches | Autor/colectivo | Público o restringido | Autoría y permisos | Local; sincronización según autorización |
+| Documentos | Contratos, convocatorias | Responsable designado | Restringido | Acceso por rol | Preferentemente local |
+| Datos personales | Contactos y perfiles | Responsable de datos | Sensible/restringido según contenido | Acceso limitado y protección | Local prioritario |
+| Ubicaciones | Eventos culturales | Organizador | Público o restringido | Clasificación geográfica | Local; publicar solo lo autorizado |
+| Inventarios | Productos | Responsable comercial | Interno | Integridad y control de acceso | Local; sincronización controlada |
+| Credenciales | Usuarios y autenticación | Administrador | Sensible | Protección reforzada | Local; nunca exposición innecesaria |
+| Metadatos | Autor, procedencia, licencia | Responsable del activo | Interno/restringido | Integridad y trazabilidad | Local y respaldado |
+| Licencias | Permisos de uso | Responsable de derechos | Restringido | Control de acceso | Local prioritario |
+| Respaldos | Copias de activos | Administrador | Según activo | Integridad, disponibilidad | Local + remoto cifrado si se autoriza |
+| Contenido público | Obras autorizadas | Responsable editorial | Público | Integridad y procedencia | Local + publicación controlada |
+
+### Niveles preliminares
+
+- **Público:** información autorizada para consulta abierta.
+- **Interno:** información necesaria para la operación del colectivo.
+- **Restringido:** información cuyo acceso requiere un rol o autorización.
+- **Sensible o sujeto a autorización:** información cuya exposición o transferencia puede generar consecuencias relevantes y requiere controles adicionales.
+
+---
+
+# 10. Arquitectura preliminar local-híbrida
+
+La arquitectura propuesta se basa en una estrategia **local-first**, entendida como la priorización de procesamiento, almacenamiento y disponibilidad local para los procesos esenciales.
+
+### Componentes conceptuales
+
+1. Clientes web o dispositivos de acceso.
+2. Aplicación web local.
+3. Servidor o estación local.
+4. Almacenamiento local.
+5. Base de datos local.
+6. Repositorio de activos multimedia.
+7. Módulo de derechos, licencias y metadatos.
+8. Módulo de mapas.
+9. Módulo de catálogo y merchandising.
+10. Reproductor de audio.
+11. Autenticación y autorización.
+12. Registro de auditoría.
+13. Sincronización controlada.
+14. Copias de respaldo.
+15. Servicios remotos excepcionales.
+
+### Ejecución local prioritaria
+
+Deberían permanecer prioritariamente en el entorno local:
+
+- Gestión de usuarios y permisos.
+- Consulta de activos restringidos.
+- Administración de metadatos.
+- Gestión de derechos y licencias.
+- Almacenamiento de información sensible.
+- Auditoría.
+- Operaciones esenciales de consulta y edición.
+- Procesos necesarios para funcionamiento offline.
+
+### Sincronización remota
+
+Podrían sincronizarse, previa autorización:
+
+- Contenidos expresamente clasificados como públicos.
+- Respaldos seleccionados.
+- Metadatos no sensibles.
+- Información necesaria para interoperabilidad con servicios externos.
+- Contenidos cuya transferencia haya sido autorizada por su responsable.
+
+### Diagrama conceptual
+
+```text
+                    ┌─────────────────────────────┐
+                    │        USUARIOS             │
+                    │ Artistas / Gestores /       │
+                    │ Administradores / Público   │
+                    └──────────────┬──────────────┘
+                                   │
+                                   ▼
+                    ┌─────────────────────────────┐
+                    │     APLICACIÓN WEB LOCAL    │
+                    │ Roles / Consulta / Gestión  │
+                    └──────────────┬──────────────┘
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │     CONTROLES DE SEGURIDAD  │
+                    │ Autenticación / Autorización│
+                    │ Auditoría / Mínimo privilegio│
+                    └──────────────┬──────────────┘
+                                   │
+             ┌─────────────────────┼─────────────────────┐
+             │                     │                     │
+             ▼                     ▼                     ▼
+      ┌─────────────┐       ┌─────────────┐       ┌──────────────┐
+      │ Base de     │       │ Activos     │       │ Metadatos /  │
+      │ datos local │       │ multimedia  │       │ Derechos     │
+      └─────────────┘       └─────────────┘       └──────────────┘
+             │                     │                     │
+             └─────────────────────┼─────────────────────┘
+                                   │
+                                   ▼
+                    ┌─────────────────────────────┐
+                    │ SINCRONIZACIÓN AUTORIZADA  │
+                    │ Reglas / filtros / registro│
+                    └──────────────┬──────────────┘
+                                   │
+                          ┌────────▼────────┐
+                          │ SERVICIOS       │
+                          │ REMOTOS         │
+                          │ EXCEPCIONALES   │
+                          └────────┬────────┘
+                                   │
+                          ┌────────▼────────┐
+                          │ RESPALDO REMOTO │
+                          │    OPCIONAL     │
+                          └─────────────────┘
+```
+
+---
+
+# 11. Alcance del proyecto
+
+## 11.1 Alcance funcional
+
+El proyecto contempla preliminarmente:
+
+- Gestión de usuarios y roles.
+- Registro de artistas y gestores.
+- Administración de obras y activos culturales.
+- Reproductor de audio.
+- Galería de imágenes y contenidos.
+- Visor documental.
+- Registro de autoría, licencias y créditos.
+- Mapa de eventos.
+- Catálogo de merchandising.
+- Gestión básica de productos físicos y digitales.
+- Consulta offline.
+- Sincronización controlada.
+- Registro de cambios.
+- Auditoría.
+- Administración de permisos.
+- Consulta de metadatos y procedencia.
+
+## 11.2 Alcance tecnológico
+
+Se contempla:
+
+- Aplicación web.
+- Operación local prioritaria.
+- Almacenamiento local.
+- Arquitectura híbrida.
+- Preparación para capacidades multimodales.
+- Posible incorporación futura de RAG, modelos locales o agentes controlados.
+- Utilización de herramientas equivalentes sin dependencia conceptual de una única plataforma.
+
+La selección definitiva de tecnologías, modelos, hardware y componentes se realizará posteriormente a partir del diagnóstico.
+
+## 11.3 Alcance territorial y poblacional
+
+El proyecto se orienta inicialmente al **Colectivo de Artistas “Caminarte” y gestores culturales de Santander de Quilichao, Cauca**. Una eventual ampliación territorial o poblacional deberá evaluarse después de validar el funcionamiento, los requisitos y la capacidad de infraestructura.
+
+## 11.4 Exclusiones
+
+En esta fase no se incluye necesariamente:
+
+- Entrenamiento de modelos fundacionales.
+- Automatización completa de decisiones sensibles.
+- Publicación automática sin revisión humana.
+- Acceso irrestricto de agentes al sistema operativo.
+- Procesamiento remoto de información sensible sin autorización.
+- Georreferenciación de domicilios privados sin consentimiento.
+- Comercio electrónico completo con pasarelas de pago, salvo definición posterior.
+- Sustitución de asesoría jurídica en derechos de autor.
+- Reconocimiento biométrico.
+- Clonación de voz o rostro.
+- Garantía de exactitud jurídica de documentos generados automáticamente.
+
+---
+
+# 12. Requisitos preliminares
+
+## 12.1 Requisitos funcionales
+
+| Código | Requisito | Prioridad | Usuario relacionado | Criterio de aceptación preliminar |
+|---|---|---|---|---|
+| RF-01 | Registrar usuarios autorizados | Alta | Administrador | El administrador puede crear y desactivar cuentas según las políticas definidas. |
+| RF-02 | Gestionar roles | Alta | Administrador | Cada usuario posee un rol y permisos asociados. |
+| RF-03 | Autenticar usuarios | Alta | Usuarios internos | Los usuarios internos deben autenticarse antes de acceder a información restringida. |
+| RF-04 | Registrar artistas y gestores | Alta | Administrador/Gestor | Debe existir un registro estructurado de artistas y gestores autorizados. |
+| RF-05 | Registrar obras culturales | Alta | Artistas/Gestores | Una obra puede registrarse con datos básicos y metadatos de procedencia. |
+| RF-06 | Gestionar archivos de audio | Alta | Artistas/Gestores | Los archivos autorizados pueden cargarse, organizarse y reproducirse. |
+| RF-07 | Gestionar imágenes | Alta | Artistas/Gestores | Las imágenes pueden almacenarse y consultarse según permisos. |
+| RF-08 | Gestionar documentos | Alta | Gestores | Los documentos se clasifican según nivel de acceso. |
+| RF-09 | Registrar derechos y licencias | Alta | Responsable de derechos | Cada activo puede asociarse con información de autoría, licencia y permisos. |
+| RF-10 | Gestionar créditos y procedencia | Alta | Gestores/Artistas | El sistema permite consultar la procedencia y autoría registrada. |
+| RF-11 | Registrar eventos | Alta | Organizadores | Los eventos pueden registrarse con información autorizada. |
+| RF-12 | Gestionar ubicaciones | Alta | Organizadores | Las ubicaciones pueden clasificarse antes de publicarse. |
+| RF-13 | Gestionar catálogo de productos | Media | Responsable comercial | Los productos autorizados pueden registrarse y consultarse. |
+| RF-14 | Consultar y filtrar activos | Alta | Usuarios autorizados | El sistema permite realizar búsquedas mediante criterios definidos. |
+| RF-15 | Consultar metadatos | Alta | Usuarios autorizados | El usuario autorizado puede consultar metadatos del activo. |
+| RF-16 | Registrar cambios | Alta | Administrador | Las modificaciones relevantes quedan asociadas al usuario y momento correspondiente. |
+| RF-17 | Auditar operaciones | Alta | Administrador | Se pueden consultar registros de operaciones relevantes. |
+| RF-18 | Operar offline | Alta | Usuarios autorizados | Las funciones esenciales definidas pueden utilizarse sin conexión externa. |
+| RF-19 | Sincronizar selectivamente | Alta | Administrador | Solo información que cumpla las reglas establecidas puede sincronizarse. |
+| RF-20 | Realizar respaldos | Alta | Administrador | Se pueden generar y verificar copias de respaldo. |
+| RF-21 | Exportar información controladamente | Media | Administrador/Gestor | La exportación requiere autorización y registra la operación. |
+| RF-22 | Administrar permisos | Alta | Administrador | Los permisos pueden modificarse conforme al modelo de roles. |
+| RF-23 | Consultar estado de sincronización | Media | Administrador | El sistema informa las operaciones de sincronización realizadas. |
+| RF-24 | Administrar contenidos públicos | Media | Administrador/Editor | Los contenidos publicados deben contar con autorización correspondiente. |
+
+## 12.2 Requisitos no funcionales
+
+| Código | Categoría | Requisito | Indicador o criterio preliminar |
+|---|---|---|---|
+| RNF-01 | Privacidad | Los datos personales deberán gestionarse según las políticas aplicables. | Validación documental y pruebas de acceso. |
+| RNF-02 | Seguridad | El sistema deberá aplicar autenticación y autorización. | Casos de prueba de acceso autorizado/no autorizado. |
+| RNF-03 | Offline | Las funciones esenciales deberán operar localmente. | Cumplimiento de escenarios definidos. |
+| RNF-04 | Rendimiento | Las operaciones deberán responder de acuerdo con la capacidad del hardware disponible. | Línea base establecida mediante pruebas. |
+| RNF-05 | Usabilidad | La interfaz deberá ser comprensible para los usuarios objetivo. | Pruebas de uso con protocolo definido. |
+| RNF-06 | Accesibilidad | La interfaz deberá considerar criterios básicos de accesibilidad. | Lista de verificación y pruebas. |
+| RNF-07 | Mantenibilidad | Los componentes deberán poder actualizarse y documentarse. | Documentación técnica disponible. |
+| RNF-08 | Portabilidad | La aplicación deberá poder desplegarse en infraestructura compatible. | Prueba de despliegue documentada. |
+| RNF-09 | Escalabilidad | La arquitectura deberá permitir crecimiento gradual. | Evaluación de capacidad y diseño. |
+| RNF-10 | Interoperabilidad | Los datos deberán utilizar formatos y estructuras documentadas cuando sea posible. | Pruebas de importación/exportación. |
+| RNF-11 | Trazabilidad | Las operaciones relevantes deberán quedar registradas. | Auditoría de casos definidos. |
+| RNF-12 | Soberanía | La información restringida deberá permanecer bajo control local salvo autorización. | Revisión de transferencias. |
+| RNF-13 | Recuperación | Deberán existir procedimientos de restauración de respaldos. | Prueba de recuperación documentada. |
+| RNF-14 | Eficiencia computacional | El consumo de recursos deberá ajustarse a la capacidad disponible. | Medición durante pruebas. |
+| RNF-15 | Sostenibilidad | Deberá existir documentación para operación y mantenimiento. | Manuales y procedimientos disponibles. |
+| RNF-16 | Licenciamiento | Las dependencias utilizadas deberán tener licencias identificadas. | Inventario de componentes. |
+| RNF-17 | Observabilidad | Las operaciones críticas deberán producir registros útiles. | Revisión de logs y eventos. |
+| RNF-18 | Control de cambios | Los cambios relevantes deberán quedar documentados. | Registro de versiones y modificaciones. |
+
+---
+
+# 13. Criterios de éxito
+
+Los siguientes criterios constituyen metas preliminares. No representan resultados obtenidos.
+
+| Código | Criterio de éxito | Indicador | Método de verificación | Meta preliminar |
+|---|---|---|---|---|
+| CE-01 | Funcionamiento local | Ejecución de funciones esenciales | Prueba controlada | 100 % de los casos definidos |
+| CE-02 | Consulta de activos | Activos recuperables | Casos de consulta | Cumplimiento de escenarios establecidos |
+| CE-03 | Operación offline | Funciones disponibles sin Internet | Desconexión controlada | 100 % de funciones esenciales definidas |
+| CE-04 | Sincronización controlada | Transferencias autorizadas | Revisión de registros | Sin transferencia no autorizada |
+| CE-05 | Protección de información restringida | Intentos de acceso bloqueados | Pruebas de permisos | 100 % de los casos definidos |
+| CE-06 | Derechos y licencias | Activos con metadatos requeridos | Revisión de registros | Cumplimiento de campos definidos |
+| CE-07 | Trazabilidad | Operaciones registradas | Auditoría | 100 % de operaciones críticas definidas |
+| CE-08 | Usabilidad | Cumplimiento de tareas | Pruebas con usuarios | Cumplimiento del protocolo de validación |
+| CE-09 | Disponibilidad | Funciones operativas localmente | Pruebas | Cumplimiento de escenarios definidos |
+| CE-10 | Integridad | Consistencia de archivos y metadatos | Comparación antes/después | Sin alteraciones no justificadas |
+| CE-11 | Recuperación | Restauración de respaldo | Simulación | Recuperación exitosa de casos definidos |
+| CE-12 | Aceptación | Validación de requisitos | Instrumento de evaluación | Cumplimiento de criterios acordados |
+| CE-13 | Documentación | Existencia de documentación | Revisión documental | Componentes definidos documentados |
+| CE-14 | Reproducibilidad | Capacidad de repetir despliegue/pruebas | Protocolo | Cumplimiento del procedimiento documentado |
+| CE-15 | Viabilidad | Operación en hardware disponible | Prueba de capacidad | Cumplimiento de línea base establecida |
+
+---
+
+# 14. Matriz de riesgos NIST AI RMF
+
+## 14.1 Metodología preliminar
+
+La identificación de riesgos se organiza según las funciones del **NIST AI Risk Management Framework (AI RMF) 1.0**: **Govern, Map, Measure y Manage**. La valoración propuesta es cualitativa y preliminar.
+
+Se utilizan tres niveles de probabilidad:
+
+- **Baja:** el evento requiere condiciones poco frecuentes o controles existentes reducen significativamente su posibilidad.
+- **Media:** el evento puede ocurrir bajo determinadas condiciones.
+- **Alta:** existen condiciones que pueden facilitar su ocurrencia o exposición.
+
+El impacto se clasifica como:
+
+- **Bajo**
+- **Medio**
+- **Alto**
+- **Crítico**
+
+El nivel de riesgo se determina combinando cualitativamente probabilidad e impacto. Esta valoración **no constituye una certificación de cumplimiento**, ni sustituye una evaluación de riesgos posterior con evidencia real.
+
+## 14.2 Matriz
+
+| ID | Función NIST | Categoría de riesgo | Riesgo | Activo afectado | Causa | Consecuencia | Probabilidad | Impacto | Nivel de riesgo | Control preventivo | Control detectivo | Acción de mitigación | Responsable | Evidencia de verificación |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| R-01 | Govern | Acceso | Acceso no autorizado a obras/documentos | Obras/documentos | Permisos inadecuados | Exposición o modificación | Media | Alto | Alto | RBAC y mínimo privilegio | Auditoría de accesos | Revisar roles | Administrador | Pruebas de autorización |
+| R-02 | Govern | Privacidad | Fuga de datos personales | Perfiles/contactos | Acceso o transferencia indebida | Afectación de privacidad | Media | Crítico | Alto | Clasificación y restricciones | Logs | Bloqueo y revisión de transferencias | Responsable de datos | Pruebas de acceso |
+| R-03 | Manage | Transferencia | Sincronización remota no autorizada | Activos restringidos | Reglas insuficientes | Pérdida de control | Media | Crítico | Alto | Lista de activos transferibles | Registro de sincronización | Bloqueo de transferencias no autorizadas | Administrador | Registro de sincronización |
+| R-04 | Govern | Soberanía | Pérdida de control sobre activos | Obras y datos | Dependencia de terceros | Restricción de capacidad de decisión | Media | Alto | Alto | Política local-first | Auditoría de proveedores | Revisar servicios externos | Administración | Inventario de servicios |
+| R-05 | Map | Propiedad intelectual | Uso de obras sin licencia | Obras | Falta de metadatos | Reclamos o retiro de contenidos | Media | Alto | Alto | Registro de licencias | Revisión previa | Bloquear publicación sin autorización requerida | Responsable de derechos | Registro de licencia |
+| R-06 | Map | Trazabilidad | Confusión de autoría/procedencia | Obras/metadatos | Datos incompletos | Créditos incorrectos | Media | Alto | Alto | Metadatos obligatorios | Revisión documental | Validación de procedencia | Gestor | Casos de prueba |
+| R-07 | Map | Contenido sintético | Publicación de contenido generado como real | Multimedia | Falta de etiquetado | Desinformación o atribución incorrecta | Media | Alto | Alto | Política de etiquetado | Revisión humana | Etiquetar contenido sintético | Editor | Revisión de publicación |
+| R-08 | Map | Geoprivacidad | Exposición de ubicaciones sensibles | Mapas/eventos | Publicación sin clasificación | Riesgos para personas o lugares | Media | Alto | Alto | Clasificación geográfica | Revisión previa | Restringir coordenadas | Organizador | Casos de prueba |
+| R-09 | Manage | Integridad | Alteración/eliminación accidental | Archivos | Error humano | Pérdida de información | Media | Alto | Alto | Confirmaciones y permisos | Auditoría | Restaurar respaldo | Administrador | Prueba de recuperación |
+| R-10 | Manage | Respaldo | Corrupción de copias | Respaldos | Fallos de almacenamiento | Imposibilidad de recuperación | Media | Crítico | Alto | Copias redundantes | Verificación de integridad | Restauraciones periódicas | Administrador | Prueba de restauración |
+| R-11 | Map | Disponibilidad | Fallos de conectividad | Aplicación | Dependencia externa | Interrupción | Alta | Medio | Alto | Operación local | Monitoreo | Mantener funciones offline | Soporte | Prueba sin Internet |
+| R-12 | Govern | Dependencia | Dependencia excesiva de proveedores | Plataforma | Servicios propietarios | Costos o pérdida de control | Media | Alto | Alto | Componentes sustituibles | Inventario | Plan de contingencia | Arquitectura | Inventario de dependencias |
+| R-13 | Manage | Infraestructura | Vulnerabilidad del servidor local | Servidor | Configuración insegura | Compromiso del sistema | Media | Crítico | Alto | Hardening y actualización | Monitoreo | Parches y aislamiento | Técnico | Lista de controles |
+| R-14 | Govern | Credenciales | Contraseñas inseguras | Cuentas | Políticas insuficientes | Acceso indebido | Media | Alto | Alto | Política de autenticación | Registro de accesos | Rotación y bloqueo | Administrador | Pruebas de autenticación |
+| R-15 | Govern | Privilegios | Privilegios excesivos | Plataforma/datos | Roles mal definidos | Cambios o acceso indebido | Media | Crítico | Alto | Mínimo privilegio | Auditoría | Revisiones periódicas | Administrador | Matriz de permisos |
+| R-16 | Map | IA/RAG | Prompt injection en documentos | Sistema RAG futuro | Contenido malicioso | Manipulación de instrucciones | Media | Alto | Alto | Separación de datos/instrucciones | Pruebas adversariales | Filtrado y aislamiento | Equipo técnico | Casos de prueba |
+| R-17 | Measure | IA generativa | Alucinaciones o información incorrecta | Documentos/consultas | Modelo generativo | Decisiones basadas en información errónea | Media | Alto | Alto | Fuentes y revisión humana | Evaluación de respuestas | Señalar incertidumbre y verificar fuentes | Responsable funcional | Evaluación documentada |
+| R-18 | Manage | Jurídico/IA | Recomendaciones legales incorrectas | Documentos jurídicos | Uso inadecuado de IA | Interpretación jurídica errónea | Media | Crítico | Alto | No sustituir asesoría jurídica | Revisión humana | Restringir uso a apoyo informativo | Responsable jurídico | Protocolo de validación |
+| R-19 | Map | Protección | Uso indebido de información de menores o población vulnerable | Datos personales | Clasificación insuficiente | Afectación de privacidad | Baja/Media | Crítico | Alto | Restricciones específicas | Auditoría | Prohibir transferencia sin autorización | Responsable de datos | Casos de acceso |
+| R-20 | Govern | Inclusión | Problemas de accesibilidad/exclusión digital | Interfaz | Diseño no inclusivo | Barreras de acceso | Media | Medio | Medio | Criterios de accesibilidad | Pruebas de uso | Correcciones de interfaz | Equipo de diseño | Lista de verificación |
+| R-21 | Manage | Obsolescencia | Dependencias/modelos obsoletos | Software | Falta de actualización | Vulnerabilidades o incompatibilidades | Media | Alto | Alto | Inventario y mantenimiento | Revisión periódica | Plan de actualización | Técnico | Inventario actualizado |
+| R-22 | Measure | Sostenibilidad | Consumo computacional excesivo | Hardware/energía | Procesos ineficientes | Costos y menor disponibilidad | Media | Medio | Medio | Eficiencia local | Monitoreo | Optimización | Técnico | Mediciones |
+| R-23 | Measure | Trazabilidad | Pérdida de registro de cambios | Datos/configuración | Auditoría incompleta | Dificultad de investigación | Media | Alto | Alto | Logs | Revisión de registros | Fortalecer auditoría | Administrador | Auditoría |
+| R-24 | Map | Consentimiento | Uso de imágenes, audios o voces sin consentimiento | Multimedia | Permisos insuficientes | Reclamos o afectación de derechos | Media | Alto | Alto | Registro de autorizaciones | Revisión previa | Bloqueo de contenidos no autorizados | Responsable de contenido | Registros |
+| R-25 | Manage | Disponibilidad | Indisponibilidad por fallo de hardware | Servidor local | Falla física | Interrupción de operación | Media | Alto | Alto | Respaldos y mantenimiento | Monitoreo | Equipo/repuesto y recuperación | Técnico | Simulación de falla |
+| R-26 | Manage | Continuidad | Dificultad de recuperación después de incidente | Plataforma completa | Procedimientos incompletos | Prolongación de interrupción | Media | Crítico | Alto | Plan de recuperación | Simulacros | Documentar recuperación | Administrador | Prueba de restauración |
+
+La matriz deberá actualizarse después del diagnóstico, cuando existan datos reales sobre infraestructura, usuarios, volúmenes, amenazas y procesos.
+
+---
+
+# 15. Mapa preliminar de flujo de datos
+
+El flujo general puede representarse de la siguiente manera:
+
+```text
+┌──────────────┐
+│   Usuarios   │
+└──────┬───────┘
+       │
+       ▼
+┌─────────────────────┐
+│ Aplicación web      │
+│ local               │
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│ Autenticación /     │
+│ autorización /      │
+│ auditoría            │
+└─────────┬───────────┘
+          │
+     ┌────┴───────────────┐
+     │                    │
+     ▼                    ▼
+┌──────────────┐    ┌────────────────┐
+│ Base de datos│    │ Repositorio de │
+│ local        │    │ activos        │
+└──────┬───────┘    └───────┬────────┘
+       │                     │
+       └──────────┬──────────┘
+                  ▼
+       ┌──────────────────────┐
+       │ Módulo de            │
+       │ sincronización       │
+       │ controlada           │
+       └──────────┬───────────┘
+                  │
+          Solo datos autorizados
+                  │
+                  ▼
+       ┌──────────────────────┐
+       │ Servicio remoto /    │
+       │ respaldo opcional    │
+       └──────────────────────┘
+```
+
+### Datos que deben permanecer localmente
+
+De manera preliminar:
+
+- Credenciales.
+- Datos personales restringidos.
+- Documentación sensible.
+- Obras sin autorización de transferencia.
+- Licencias y permisos restringidos.
+- Información administrativa sensible.
+- Registros de auditoría cuya transferencia no haya sido autorizada.
+
+### Datos que podrían sincronizarse
+
+- Contenidos expresamente autorizados.
+- Datos públicos.
+- Respaldos seleccionados.
+- Metadatos no sensibles.
+- Información necesaria para servicios externos autorizados.
+
+### Datos que no deberían transferirse sin autorización
+
+- Datos personales restringidos.
+- Obras protegidas cuando no exista permiso.
+- Documentos confidenciales.
+- Credenciales.
+- Información sobre personas vulnerables.
+- Ubicaciones clasificadas como sensibles.
+
+### Datos que podrían ser públicos
+
+Únicamente información previamente clasificada y autorizada como pública, por ejemplo:
+
+- Eventos autorizados.
+- Información de productos.
+- Obras cuya publicación haya sido autorizada.
+- Material de difusión con permisos correspondientes.
+
+---
+
+# 16. Decisión preliminar: local, híbrida o remota
+
+| Criterio | Arquitectura local | Arquitectura híbrida | Arquitectura remota |
+|---|---|---|---|
+| Privacidad | Alto control directo | Alto control con reglas de transferencia | Dependencia de controles externos |
+| Soberanía | Alta | Alta si se controla la sincronización | Menor control directo |
+| Costos | Requiere infraestructura propia | Distribuye costos | Puede generar costos recurrentes |
+| Disponibilidad offline | Alta | Alta | Baja o dependiente de conectividad |
+| Mantenimiento | Responsabilidad local | Responsabilidad compartida | Delegación parcial |
+| Escalabilidad | Limitada por hardware | Flexible | Generalmente alta |
+| Dependencia de Internet | Baja | Moderada y controlable | Alta |
+| Control de versiones | Directo | Requiere coordinación | Depende del proveedor |
+| Respaldo | Responsabilidad local | Puede combinar respaldo local/remoto | Puede facilitar servicios gestionados |
+| Adecuación preliminar | Alta para información sensible y operación offline | Alta para necesidades mixtas | Condicionada por conectividad y soberanía |
+
+La **arquitectura híbrida con operación local prioritaria** se plantea como decisión preliminar porque permite combinar dos necesidades potencialmente simultáneas: mantener bajo control local los activos y procesos que requieren mayor protección y, cuando exista autorización, utilizar servicios remotos para respaldo, distribución o interoperabilidad.
+
+Esta decisión no supone que la nube sea intrínsecamente inadecuada. Los servicios remotos pueden aportar ventajas de respaldo, disponibilidad y escalabilidad. El criterio central será determinar qué datos pueden salir del entorno local, con qué autorización, bajo qué controles y para qué finalidad.
+
+La infraestructura local, por su parte, genera responsabilidades adicionales: mantenimiento, actualizaciones, copias de seguridad, gestión de credenciales, seguridad física, recuperación ante fallos y administración de vulnerabilidades.
+
+---
+
+# 17. Supuestos, restricciones y aspectos por validar
+
+## 17.1 Supuestos
+
+Se plantean como hipótesis de trabajo:
+
+- El colectivo podrá designar responsables de administración.
+- Existirá autorización para utilizar los activos que sean publicados.
+- Habrá al menos un equipo local para operar la aplicación.
+- Los usuarios podrán participar en actividades de validación.
+- Los activos culturales podrán clasificarse según niveles de acceso.
+- Podrá establecerse una política básica de derechos, licencias y permisos.
+- Los procesos esenciales podrán identificarse antes de la implementación.
+
+## 17.2 Restricciones
+
+Entre las restricciones preliminares se consideran:
+
+- Presupuesto limitado.
+- Conectividad variable.
+- Capacidad de hardware heterogénea.
+- Disponibilidad limitada de personal técnico.
+- Diferentes condiciones de licencia para cada tipo de contenido.
+- Necesidad de operación offline.
+- Sensibilidad de determinados datos.
+- Necesidad de mantener controles sobre servicios externos.
+
+## 17.3 Aspectos por validar
+
+Durante el diagnóstico deberán determinarse:
+
+1. Número real de usuarios.
+2. Volumen actual de archivos.
+3. Formatos de audio, imagen y video.
+4. Capacidad disponible de almacenamiento.
+5. Frecuencia requerida de sincronización.
+6. Nivel de disponibilidad requerido.
+7. Roles definitivos.
+8. Política de derechos y licencias.
+9. Reglas de publicación de ubicaciones.
+10. Necesidad real de incorporar IA generativa.
+11. Necesidad real de RAG.
+12. Necesidad real de agentes autónomos.
+13. Infraestructura disponible.
+14. Procedimientos actuales de respaldo.
+15. Procesos actuales de publicación y gestión documental.
+
+Estos aspectos son fundamentales porque permitirán evitar que la arquitectura se diseñe sobre supuestos no comprobados.
+
+---
+
+# 18. Conclusión del Módulo 1
+
+La caracterización desarrollada permite establecer que el problema del proyecto integrador no se limita a la necesidad de construir una aplicación web para mostrar contenidos culturales. La necesidad identificada preliminarmente se relaciona con la organización, preservación, consulta, difusión y gestión controlada de activos culturales, documentales y comerciales heterogéneos, en un contexto donde pueden existir restricciones de conectividad, presupuesto, infraestructura y capacidad técnica.
+
+La dispersión de información, la ausencia potencial de mecanismos uniformes de clasificación y trazabilidad, la gestión diferenciada de derechos y licencias, la exposición de ubicaciones, la dependencia de servicios externos y la posibilidad de fallas de conectividad constituyen factores que justifican realizar primero un diagnóstico formal.
+
+Desde esta perspectiva, una arquitectura local-híbrida resulta pertinente como **hipótesis de solución tecnológica**, porque permite priorizar la operación local de información y procesos que requieren mayor control, mientras conserva la posibilidad de utilizar servicios remotos de manera excepcional para respaldo, sincronización o interoperabilidad. Su adopción, sin embargo, no elimina riesgos: traslada parte de la responsabilidad hacia la administración de la infraestructura local y exige mecanismos de autenticación, autorización, auditoría, respaldo, actualización y recuperación.
+
+La soberanía tecnológica constituye, por tanto, un criterio de diseño y gobernanza, no simplemente una decisión sobre dónde almacenar archivos. Implica conservar capacidad de decisión sobre los datos, las transferencias, los componentes tecnológicos, los permisos y los procedimientos de recuperación.
+
+Los riesgos identificados mediante las funciones **Govern, Map, Measure y Manage** del NIST AI RMF abarcan dimensiones de privacidad, seguridad, propiedad intelectual, trazabilidad, infraestructura, disponibilidad, sostenibilidad y riesgos asociados a eventuales capacidades de inteligencia artificial. Los riesgos de RAG, agentes, alucinaciones o recomendaciones generativas se mantienen como consideraciones futuras o controladas, puesto que el presente documento corresponde al Módulo 1 y no presupone una implementación completa de dichas tecnologías.
+
+De igual manera, los requisitos y criterios de éxito establecidos constituyen una línea base preliminar. Su validez deberá comprobarse mediante inventario de activos, entrevistas, observación de procesos, revisión documental, identificación de usuarios, análisis de infraestructura y pruebas con el colectivo.
+
+La siguiente etapa del proyecto deberá, por tanto, validar con los usuarios reales los requisitos, la clasificación de datos, los niveles de acceso, la arquitectura, el hardware, las políticas de derechos y licencias, los mecanismos de respaldo, las reglas de sincronización y la necesidad efectiva de incorporar modelos generativos, RAG o agentes. Solo después de esta validación será técnicamente razonable avanzar hacia decisiones concretas de implementación.
+
+---
+
+# Referentes normativos y técnicos preliminares
+
+Los siguientes referentes corresponden exclusivamente a los suministrados para el proyecto:
+
+1. **NIST AI Risk Management Framework 1.0 (NIST AI RMF 1.0).**  
+   Marco conceptual utilizado para estructurar la identificación y tratamiento preliminar de riesgos mediante las funciones Govern, Map, Measure y Manage.
+
+2. **NIST AI 600-1, perfil de riesgos para inteligencia artificial generativa.**  
+   Referente para considerar riesgos específicos asociados a sistemas de inteligencia artificial generativa que puedan incorporarse posteriormente al proyecto.
+
+3. **UNESCO, Recomendación sobre la Ética de la Inteligencia Artificial.**  
+   Referente conceptual para derechos humanos, privacidad, transparencia, responsabilidad, supervisión humana, no discriminación y sostenibilidad.
+
+4. **Ley 1581 de 2012 de Colombia sobre protección de datos personales.**  
+   Referente jurídico preliminar para el tratamiento de datos personales. La aplicación concreta de sus disposiciones al proyecto deberá validarse según los tipos de datos, responsables, encargados y operaciones efectivamente implementados.
+
+5. **CONPES 4144 de 2025.**  
+   Referente nacional para aspectos relacionados con gobernanza, infraestructura, datos, talento, prevención de riesgos, investigación, innovación y adopción territorial de inteligencia artificial.
+
+La versión y aplicabilidad específica de cada referente deberán verificarse durante las etapas posteriores del proyecto cuando se elaboren los instrumentos definitivos de cumplimiento, seguridad, privacidad y gobernanza.
